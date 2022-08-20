@@ -12,6 +12,12 @@ public class PessoaDTO implements Serializable{
 	private String nome;
 	private String cpf;
 	private String telefone;
+	
+	
+
+	public PessoaDTO() {
+		super();
+	}
 
 	public PessoaDTO(Pessoa obj) {
 		this.id = obj.getId();
