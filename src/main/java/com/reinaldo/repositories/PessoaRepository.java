@@ -17,4 +17,5 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Integer>{
 	@Query("SELECT obj FROM Pessoa obj WHERE obj.cpf =:cpf")
 	Pessoa findByCPF(@Param("cpf") String cpf);
 
+	
 }

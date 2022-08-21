@@ -1,24 +1,32 @@
 package com.reinaldo.resources.exceptions;
 
-public class StandardError {
+import java.io.Serializable;
 
-	private String msg;
-	private Integer status;
+public class StandardError implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private Long timestamp;
-	
-	public StandardError(String msg, Integer status, Long timestamp) {
+	private Integer status;
+	private String error;
+
+	public StandardError() {
 		super();
-		this.msg = msg;
-		this.status = status;
+	}
+
+	public StandardError(Long timestamp, Integer status, String error) {
+		super();
 		this.timestamp = timestamp;
+		this.status = status;
+		this.error = error;
 	}
 
-	public String getMsg() {
-		return msg;
+	public Long getTimestamp() {
+		return timestamp;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public Integer getStatus() {
@@ -29,13 +37,12 @@ public class StandardError {
 		this.status = status;
 	}
 
-	public Long getTimestamp() {
-		return timestamp;
+	public String getError() {
+		return error;
 	}
 
-	public void setTimestamp(Long timestamp) {
-		this.timestamp = timestamp;
+	public void setError(String error) {
+		this.error = error;
 	}
-	
-	
+
 }

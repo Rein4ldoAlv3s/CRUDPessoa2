@@ -2,14 +2,16 @@ package com.reinaldo.services;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.reinaldo.domain.Pessoa;
 import com.reinaldo.domain.dto.PessoaDTO;
 import com.reinaldo.repositories.PessoaRepository;
 import com.reinaldo.services.exceptions.ObjectNotFoundException;
+import com.reinaldo.services.exceptions.DataIntegrityViolationException;
 
 @Service
 public class PessoaService {
@@ -19,30 +21,43 @@ public class PessoaService {
 
 	public Pessoa findByID(Integer id) {
 		Optional<Pessoa> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + 
-				id + " Tipo: " + Pessoa.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! ID: " + id + " Tipo: " + Pessoa.class.getName()));
 	}
 
 	public Pessoa save(PessoaDTO objDTO) {
-		return repo.save(fromDTO(objDTO));
+		if (findByCPF(objDTO) == null) {
+			Pessoa obj = new Pessoa(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone());
+			return repo.save(obj);
+		}
+		throw new DataIntegrityViolationException(("O CPF já foi cadastrado. Informe outro"));
 	}
-	
+
+	public Pessoa update(Integer id, PessoaDTO newDTO) {
+		Pessoa oldObj = findByID(id);
+
+		if (findByCPF(newDTO) != null && findByCPF(newDTO).getId() != id) {
+			throw new DataIntegrityViolationException("Esse CPF já está cadastrado. Favor informar outro!");
+		}
+
+		oldObj.setCpf(newDTO.getCpf());
+		oldObj.setNome(newDTO.getNome());
+		oldObj.setTelefone(newDTO.getTelefone());
+		return repo.save(oldObj);
+
+	}
+
+	public void delete(Integer id) {
+		findByID(id);
+		repo.deleteById(id);
+	}
+
 	private Pessoa findByCPF(PessoaDTO objDTO) {
 		Pessoa obj = repo.findByCPF(objDTO.getCpf());
-		if(obj != null) {
-			throw new DataIntegrityViolationException("Já existe cadastro com esse CPF. Informe outro.");
-		} else {
+		if (obj != null) {
 			return obj;
 		}
+		return null;
 	}
-	
-	private Pessoa fromDTO(PessoaDTO objDTO) {
-		Pessoa obj = new Pessoa();
-		obj.setId(objDTO.getId());
-		obj.setCpf(objDTO.getCpf());
-		obj.setNome(objDTO.getNome());
-		obj.setTelefone(objDTO.getTelefone());
-		return obj;
-	}
-	
+
 }

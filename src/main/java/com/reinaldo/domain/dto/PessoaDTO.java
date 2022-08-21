@@ -2,18 +2,24 @@ package com.reinaldo.domain.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.reinaldo.domain.Pessoa;
 
-public class PessoaDTO implements Serializable{
+public class PessoaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
+	@NotEmpty(message = "NÃO PODE SER NULO!")
 	private String nome;
+	@CPF
+	@NotEmpty(message = "NÃO PODE SER NULO!")
 	private String cpf;
+	@NotEmpty(message = "NÃO PODE SER NULO!")
 	private String telefone;
-	
-	
 
 	public PessoaDTO() {
 		super();

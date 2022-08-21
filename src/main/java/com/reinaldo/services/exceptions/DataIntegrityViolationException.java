@@ -1,6 +1,6 @@
 package com.reinaldo.services.exceptions;
 
-public class DataIntegrityViolationException extends RuntimeException {
+public class DataIntegrityViolationException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,7 +10,6 @@ public class DataIntegrityViolationException extends RuntimeException {
 
 	public DataIntegrityViolationException(String message) {
 		super(message);
-
 	}
 
 }
