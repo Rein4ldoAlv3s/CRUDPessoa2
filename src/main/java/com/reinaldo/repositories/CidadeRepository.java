@@ -12,4 +12,6 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer>{
 	@Query("SELECT obj FROM Cidade obj")
 	List<Cidade> findAlll();
 	
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.reinaldo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class CidadeService {
 		Optional<Cidade> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException
 				("Objeto não encontrado! ID: " + id + " Tipo: " + Cidade.class));
+	}
+	
+	public List<Cidade> findAll(){
+		return repo.findAll();
 	}
 }
