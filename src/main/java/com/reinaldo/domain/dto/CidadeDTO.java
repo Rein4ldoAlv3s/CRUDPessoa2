@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 
 import com.reinaldo.domain.Cidade;
 
-@Entity
 public class CidadeDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
