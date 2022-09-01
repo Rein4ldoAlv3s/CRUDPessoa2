@@ -28,19 +28,19 @@ public class CidadeService {
 		return repo.findAll();
 	}
 
-	public Cidade save(Cidade newObj) {
+	public Cidade save(CidadeDTO newDTO) {
 		
-		if(findByCidade(newObj) != null) {
+		if(findByCidade(newDTO) != null) {
 			throw new DataIntegrityViolationException("Cidade já cadastrada, favor informar outra!");
 		}
 		
-		return repo.save(newObj);
+		return repo.save(newDTO);
 	}
 	
-	public Cidade findByCidade(Cidade obj) {
+	public Cidade findByCidade(CidadeDTO obj) {
 		Cidade otherObj = repo.findByCidade(obj.getNome());
 		if(otherObj != null) {
-			return obj;
+			return otherObj;
 		}
 		return null;
 	}

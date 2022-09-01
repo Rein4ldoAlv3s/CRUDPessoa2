@@ -2,20 +2,20 @@ package com.reinaldo.domain.dto;
 
 import java.io.Serializable;
 
-import com.reinaldo.domain.Cidade;
+import com.reinaldo.domain.Estado;
 
-public class CidadeDTO implements Serializable{
+public class EstadoDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Integer id;
 	private String nome;
 
-	public CidadeDTO() {
+	public EstadoDTO() {
 		super();
 	}
 
-	public CidadeDTO(Cidade obj) {
+	public EstadoDTO(Estado obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
@@ -35,5 +35,8 @@ public class CidadeDTO implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
+	}
+	
+	
+
 }
