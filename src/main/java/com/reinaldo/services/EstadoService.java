@@ -20,4 +20,6 @@ public class EstadoService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException
 				("Estado não encontrado! ID: " + id + " Classe: " + Estado.class ));
 	}
+	
+	
 }

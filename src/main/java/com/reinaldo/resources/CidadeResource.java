@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reinaldo.domain.Cidade;
 import com.reinaldo.domain.dto.CidadeDTO;
+import com.reinaldo.repositories.CidadeRepository;
 import com.reinaldo.services.CidadeService;
 
 @RestController
@@ -20,6 +21,8 @@ public class CidadeResource {
 
 	@Autowired
 	private CidadeService service;
+	@Autowired
+	private CidadeRepository repo;
 	
 	//Retorna a lista de apenas cidades
 	@GetMapping
@@ -34,6 +37,13 @@ public class CidadeResource {
 		Cidade obj = service.findByID(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@GetMapping("teste/{id}")
+	public ResponseEntity<?> findByCid(@PathVariable Integer id){
+		return ResponseEntity.ok().body(repo.findCid());
+	}
+	
+	
 	
 //	@PostMapping
 //	public ResponseEntity<CidadeDTO> save(@RequestBody CidadeDTO objDTO){

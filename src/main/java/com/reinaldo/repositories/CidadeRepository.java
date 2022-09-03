@@ -15,6 +15,9 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer>{
 
 	@Query("SELECT obj FROM Cidade obj WHERE nome =:nome")
 	Cidade findByCidade(@Param("nome") String nome);
+
+	@Query("SELECT a FROM Cidade a JOIN a.estado b ")
+	List<?> findCid();
 	
 	
 	
